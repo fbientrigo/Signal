@@ -1,6 +1,6 @@
 # Contributing
 
-Read `CONTRACT.md` before proposing a reusable abstraction.
+Read `CONTRACT.md` before proposing reusable visual knowledge.
 
 ## Preferred contribution
 
@@ -8,22 +8,27 @@ Bring one real plotting problem and the smallest change that solves it.
 
 Good contributions include:
 
-- a repeated scientific plotting failure with a guardrail;
-- a recipe proven on more than one dataset;
-- a component that composes with existing recipes;
-- a destination profile improvement demonstrated at real output size;
-- a reverse-engineered visual mechanism that generalizes.
+- a repeated visual decision captured as an ingredient;
+- a recurring reader problem captured as a recipe after the composition has generalized;
+- a scientific guardrail that prevents a real interpretation error;
+- a destination-profile improvement demonstrated at real output size;
+- a reverse-engineered mechanism that survives another use case.
 
-Avoid speculative wrappers, new APIs, or large catalogs of near-duplicate recipes.
+Avoid:
+
+- speculative wrappers or APIs;
+- large catalogs;
+- low-level ingredients that only rename plotting parameters;
+- recipes that encode one specific combination of ingredients.
 
 ## Pull request acceptance
 
 A focused change should state:
 
-- the reader question/problem;
+- the reader problem or local visual decision;
 - why existing Signal knowledge is insufficient;
 - the smallest proposed change;
-- how it was tested;
+- how it was checked;
 - whether it changes the contract.
 
-Contract changes require explicit justification because they affect every future recipe.
+Contract changes require explicit justification because they affect every future ingredient and recipe.

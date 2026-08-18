@@ -1,6 +1,6 @@
 ---
 name: signal
-description: Lightweight visual reasoning for Python. Turn a question, data semantics, and display context into concise native Matplotlib, Seaborn, or Plotly code. Use for common plots, scientific figures, uncertainty, visual refinement, and reverse-engineering reusable chart mechanisms.
+description: Lightweight visual reasoning for Python. Clarify what matters, use a prepared recipe when one fits, or compose reusable ingredients into native Matplotlib, Seaborn, or Plotly.
 ---
 
 # Signal
@@ -11,59 +11,115 @@ description: Lightweight visual reasoning for Python. Turn a question, data sema
 
 Do not invent a Signal plotting API. Leave native Python behind.
 
-## Fast path
+## 1. Understand the reader problem
 
-If the requested plot is obvious and low-risk, use the backend already present in the project and keep the code short.
+Start with what the reader should understand.
 
-## Deliberate path
+If missing information can materially change the figure, ask a focused question. Typical high-value unknowns are:
 
-When the visual choice matters:
+- focus versus context;
+- useful signal versus noise;
+- whether color already has meaning;
+- uncertainty definition;
+- ordering;
+- weights or normalization;
+- valid transformations.
 
-1. **Question** — state in one sentence what the reader should be able to see.
-2. **Destination** — paper, slides, screen, exploratory, or another explicit medium.
-3. **Semantics** — identify only decision-relevant facts: units, ordering, groups, weights, missingness, transforms, sample structure, and uncertainty meaning.
-4. **Recipe** — choose the simplest familiar representation that answers the question.
-5. **Components** — add only what is needed: uncertainty, context, highlight, reference, annotation, normalization, facet, interaction.
-6. **Profile** — adapt typography, density, aspect ratio, line weight, and export to the destination.
-7. **Integrity check** — verify that the figure does not distort or hide the scientific meaning.
-8. **Render native Python** — Matplotlib by default for static/scientific control, Seaborn when it genuinely reduces statistical plotting code, Plotly when interaction changes the analysis.
-9. **Inspect at target size** — especially for papers and slides.
-10. **Change one cause at a time** — refine only the highest-impact mismatch or readability problem.
+Do not ask for preferences that only change decoration unless the user cares about them.
 
-## Output mode
+## 2. Choose the path
 
-Choose the smallest useful integration:
+### Fast path — recipe
 
-- durable/reviewed figure → standalone `plots/<name>.py`;
-- local exploration/diagnostic → embedded plotting block;
-- repeated project styling → optional project-local `_style.py` copied/adapted from `themes/`.
+Use a recipe when the task is common and the reader question matches clearly.
+
+A recipe is a prepared solution built from ingredients. Use its defaults, adapt only what the data or destination requires, then render.
+
+### Flexible path — ingredients
+
+If the data are unusual, layered, or do not fit a recipe cleanly, compose ingredients directly.
+
+Do not create or force a new recipe just to name the combination.
+
+## 3. Preserve semantics
+
+Keep explicit anything that can change interpretation:
+
+- units and scales;
+- category ordering;
+- weights and normalization;
+- missing values and exclusions;
+- transforms;
+- sample or replicate structure;
+- uncertainty meaning;
+- bounded quantities.
+
+## 4. Apply the destination
+
+Adapt typography, density, aspect ratio, annotation density, and export to paper, slides, screen, exploratory work, or another explicit destination.
+
+Destination changes presentation, not scientific meaning.
+
+## 5. Render native Python
+
+- Matplotlib by default for static/scientific control;
+- Seaborn when it genuinely reduces statistical plotting code;
+- Plotly when interaction changes how the user inspects the data.
+
+Durable figure → prefer `plots/<descriptive_name>.py`.
+
+Local exploration → embedded plotting block is fine.
 
 Generated plots must not import Signal.
 
 ## Selective loading
 
-Open only what the task needs:
+Open only what the problem needs:
+
+### Recipes
+
+- distribution shape/spread/tails → `recipes/distribution_overview.md`
+- relationship between numeric variables → `recipes/relationship_overview.md`
+- magnitudes across categories → `recipes/categorical_comparison.md`
+- ordered estimate with uncertainty → `recipes/trend_with_uncertainty.md`
+- one focus against broader context → `recipes/focus_in_context.md`
+
+### Ingredients
+
+- scales, limits, ordering, log axes → `ingredients/axes.md`
+- semantic color decisions → `ingredients/color.md`
+- histogram/ECDF/weights/normalization → `ingredients/distribution.md`
+- scatter, density, heatmap, 2D field → `ingredients/relationship.md`
+- ordered x/time and connecting observations → `ingredients/trend.md`
+- intervals, error bars, bands → `ingredients/uncertainty.md`
+- context, highlight, reference, annotation → `ingredients/emphasis.md`
+- facets and comparable panels → `ingredients/layout.md`
+
+Other references:
 
 - chart choice unclear → `references/chart_selection.md`
-- scientific/error/weight/log/missingness issue → `references/scientific_integrity.md`
+- scientific integrity issue → `references/scientific_integrity.md`
 - destination/layout/typography → `themes/README.md`
-- uncertainty/error bars/bands → `components/uncertainty.md`
-- emphasis/context → `components/highlight.md`
-- threshold/baseline → `components/reference_line.md`
-- direct callout → `components/annotation.md`
-- density/percent/weights → `components/normalization.md`
-- repeated comparable panels → `components/facet.md`
-- interaction → `components/interaction.md`
-- common chart → matching file under `recipes/common/`
-- recurring scientific pattern → matching file under `recipes/scientific/`
-- chart reproduction/learning → `lab/reverse/README.md`
+- reverse engineering → `lab/reverse/README.md`
 
-## Uncertainty rule
+## Refinement
 
-Before drawing uncertainty, know what it represents. Prefer explicit names in code, labels, or nearby prose. Preserve asymmetric intervals and bounded quantities. Do not call spread, measurement error, and inferential intervals the same thing.
+Inspect at the real target size.
 
-## New-pattern rule
+Change one high-impact cause at a time.
 
-`example → decomposition → native reproduction → reusable unit → second-dataset test → promote`
+Stop when the reader can answer the intended question without unnecessary decoding and the scientific meaning remains intact.
+
+## New knowledge
+
+```text
+real example
+→ reusable ingredient(s)
+→ native reproduction
+→ second use case
+→ promote only if repeated value is demonstrated
+```
+
+A recurring stable composition may later become a recipe.
 
 Do not promote source-specific decoration.

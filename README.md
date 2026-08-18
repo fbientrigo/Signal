@@ -2,165 +2,173 @@
 
 **Think deeply. Show simply.**
 
-Signal is a lightweight visual-reasoning skill for Python. It helps coding agents turn a question, data semantics, and display context into clear, editable Matplotlib, Seaborn, or Plotly code.
+Signal is a lightweight visual-reasoning skill for Python. It helps coding agents turn a reader question, data semantics, and display context into clear, editable Matplotlib, Seaborn, or Plotly code.
 
-Signal is not a plotting package, renderer, or DSL. The output is ordinary Python that can live in a `plots/` directory, inside a notebook, or embedded in existing analysis code.
+Signal is not a plotting package, renderer, or DSL. The output is ordinary Python that can live in a `plots/` directory, a notebook, or existing analysis code.
 
-## Why Signal
+## Core idea
 
-Existing tools tend to optimize one side of the problem: compact chart specifications, scientific plotting guidance, or rendering APIs. Signal combines the useful parts without adding a new runtime:
+Signal keeps only two reusable visual building blocks:
 
-- compact intent and visual decisions;
-- scientific guardrails, especially around uncertainty;
-- reusable recipes built from independent components;
-- destination-aware typography, density, and palette choices;
-- native Python left behind for manual editing.
+- **ingredients** — small, reusable solutions to visual decisions that are easy to repeat or get wrong;
+- **recipes** — prepared combinations of ingredients for recurring reader problems, with sensible defaults and room to adapt.
 
-## Contract
+Recipes provide speed. Ingredients provide freedom.
 
-Signal follows a small set of rules:
+A recipe is a default path, not a whitelist of allowed figures.
 
-1. Start from the question.
-2. Preserve the scientific meaning of the data.
-3. Design for where the figure will be seen.
-4. Keep simple plots simple.
-5. Treat uncertainty as data, not decoration.
-6. Use color to encode meaning or direct attention.
-7. Compose recipes from small independent components.
-8. Prefer native Matplotlib, Seaborn, or Plotly code.
-9. A generated plot must not depend on Signal to run.
-10. Add abstraction only after repeated use proves it useful.
+## Start with the conversation
 
-See [`CONTRACT.md`](CONTRACT.md) for the frozen rules.
+Before choosing a visual form, establish what matters. Ask only when the answer can materially change the figure.
+
+Useful questions include:
+
+- what should the reader understand?
+- what is the focus and what is only context?
+- which data are noise for this question?
+- does color already carry meaning?
+- what does the uncertainty represent?
+- which transformations or normalizations are valid?
+
+Do not ask cosmetic questions when the answer does not change interpretation.
 
 ## Mental model
 
 ```text
-question + destination + data semantics
-                ↓
-              intent
-                ↓
-              recipe
-                ↓
-            components
-                ↓
-             profile
-                ↓
-        native Python code
+question + destination + data
+            ↓
+clarify only material unknowns
+            ↓
+         semantics
+            ↓
+      does a recipe fit?
+        ↙          ↘
+      yes           no
+      ↓              ↓
+use/adapt       compose ingredients
+      ↘              ↙
+         native Python
+              ↓
+      inspect at target size
 ```
 
-A figure might be described as:
+For a common task, Signal should usually take the fast path through a recipe.
+
+For unusual or layered data, Signal should compose ingredients directly instead of forcing the problem into a predefined chart family.
+
+## Ingredients
+
+An ingredient solves a local visual problem. It is more meaningful than a plotting parameter and smaller than a complete communication strategy.
+
+Initial ingredients cover:
+
+- axes and scales;
+- color;
+- distributions, including weighted data;
+- relationships and 2D fields;
+- ordered trends;
+- uncertainty;
+- emphasis and context;
+- layout and small multiples.
+
+An ingredient may contain marks, encodings, scale choices, transforms, scientific guardrails, or attention mechanisms. Signal does not create separate ontologies for those concepts.
+
+See [`ingredients/`](ingredients/).
+
+## Recipes
+
+A recipe solves a recurring reader problem with a useful default composition.
+
+Initial recipes cover:
+
+- distribution overview;
+- relationship overview;
+- categorical comparison;
+- trend with uncertainty;
+- focus in context.
+
+Recipes should expose adaptation points instead of encoding every possible combination.
 
 ```text
-efficiency curve
-+ asymmetric uncertainty
-+ benchmark highlight
-+ reference line
-+ paper profile
+good:
+trend_with_uncertainty
+focus_in_context
+
+bad:
+scatter_with_uncertainty_highlight_reference
 ```
 
-The final implementation is still normal Python.
+If no recipe fits cleanly, compose ingredients and move on.
+
+See [`recipes/`](recipes/).
+
+## Destination profiles
+
+The same scientific meaning may need different presentation depending on where it will be seen:
+
+- **paper** — compact, vector-first, information-dense;
+- **slides** — larger type, stronger hierarchy, fewer details;
+- **screen** — comfortable spacing;
+- **exploratory** — rapid inspection and optional interaction.
+
+Destination changes presentation, not scientific meaning.
+
+See [`themes/`](themes/).
 
 ## Output modes
 
 ### Standalone plot script
 
-Use for durable figures that will be revisited, reviewed, or regenerated.
+Prefer for durable figures:
 
 ```text
 project/
 └── plots/
     ├── efficiency_vs_mass.py
-    ├── lifetime_distribution.py
-    └── _style.py              # optional project-local helper
+    └── lifetime_distribution.py
 ```
-
-Signal should prefer self-contained scripts unless a shared local style helper clearly reduces duplication.
 
 ### Embedded plot
 
-Use for notebooks, diagnostics, and small analysis scripts. Signal should emit a compact plotting block that can be edited in place.
+Use for notebooks, diagnostics, and small analysis scripts.
 
 ### Shared project style
 
-If several figures need one visual identity, copy or adapt the small helpers under [`themes/`](themes/). The target project owns that code. Signal is not a runtime dependency.
+If several figures need one visual identity, copy or adapt the small helpers under [`themes/`](themes/). The target project owns the code.
 
-## Destination profiles
-
-The same scientific figure may need different rendering decisions depending on where it will be seen:
-
-- **paper** — compact, vector-first, information-dense;
-- **slides** — large text, strong hierarchy, fewer details;
-- **screen** — comfortable spacing and medium density;
-- **exploratory** — fast iteration, diagnostics, optional interaction.
-
-Destination changes presentation, not scientific meaning.
-
-## Recipes and components
-
-Recipes capture the base visual mechanism. Components add orthogonal information.
-
-```text
-recipes/
-  common/       histogram, scatter, line, bar, ECDF
-  scientific/   efficiency, weighted distribution, residuals, parameter scan
-
-components/
-  uncertainty, highlight, reference line, annotation,
-  normalization, facets, interaction
-```
-
-Do not create a new recipe for every combination. Prefer:
-
-```text
-scatter + uncertainty + highlight
-```
-
-over:
-
-```text
-scatter_with_uncertainty_and_highlight
-```
+Generated plots must not depend on Signal at runtime.
 
 ## Plot workflow
 
-Signal uses a short visual-development loop:
-
 ```text
-question → destination → semantics → simplest recipe
-        → required components → render → inspect at target size
-        → one causal change → accept
+question
+→ clarify material unknowns
+→ destination
+→ semantics
+→ recipe if one fits, otherwise ingredients
+→ native Python
+→ inspect at target size
+→ one causal change
+→ accept
 ```
 
 See [`docs/PLOT_METHOD.md`](docs/PLOT_METHOD.md).
 
-## Repository workflow
-
-Signal itself is developed in small vertical slices. A change should solve one observed plotting problem, include a concrete example or acceptance check, and avoid speculative framework work.
-
-See [`docs/AGILE.md`](docs/AGILE.md).
-
 ## Learning from figures
 
-Useful figures can become new Signal knowledge:
+Useful figures can become Signal knowledge:
 
 ```text
-example figure
-    ↓
-identify the visual mechanism
-    ↓
-reproduce in native Python
-    ↓
-separate structure from source-specific style
-    ↓
-extract recipe/components
-    ↓
-test on a second dataset
-    ↓
-promote only if it generalizes
+example
+→ identify the reader problem
+→ decompose reusable ingredients
+→ reproduce in native Python
+→ separate structure from source-specific style
+→ test on another dataset
+→ promote an ingredient or recurring composition only if it generalizes
 ```
 
-The experimental reverse-engineering work lives under [`lab/reverse/`](lab/reverse/). ML or RL may be used later when measured evidence shows that it improves this loop.
+The experimental reverse-engineering work lives under [`lab/reverse/`](lab/reverse/).
 
 ## Sources
 
@@ -170,4 +178,4 @@ Signal borrows principles and mechanisms, not source-specific visual identities.
 
 ## Status
 
-Early foundation. The current goal is to validate the contract with real plots before expanding the recipe set.
+Early foundation. Keep the catalog small and validate the ingredients/recipes model with real plots before expanding it.

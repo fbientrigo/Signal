@@ -9,39 +9,35 @@ Use a small vertical slice:
 ```text
 real plotting problem
     ↓
-smallest reusable decision or mechanism
+smallest useful ingredient or recurring recipe
     ↓
 example / acceptance check
     ↓
-implementation or documentation change
+documentation or native-code change
     ↓
 review against the contract
 ```
 
-A slice should usually fit in one issue and one focused pull request.
+## Backlog priority
 
-## Backlog
-
-Prioritize work by observed value:
-
-1. repeated manual edits;
-2. repeated agent mistakes;
-3. scientific interpretation risks;
-4. recurring visual mechanisms;
+1. repeated agent or human mistakes;
+2. scientific interpretation risks;
+3. repeated local visual decisions;
+4. recurring reader problems with stable compositions;
 5. destination-specific readability problems;
-6. only then, convenience or polish.
+6. only then convenience or polish.
 
-Do not prioritize a feature because a plotting library supports it.
+Do not add knowledge because a plotting library happens to expose a feature.
 
 ## Definition of ready
 
 A task is ready when it has:
 
-- a concrete input or example;
-- a clear reader question;
+- a concrete example;
+- a clear reader problem or local visual decision;
 - the target destination if relevant;
 - a known failure or repeated cost;
-- one measurable acceptance condition.
+- one concrete acceptance condition.
 
 ## Definition of done
 
@@ -50,19 +46,20 @@ A change is done when:
 - it solves the stated problem;
 - the smallest sufficient change was used;
 - native Python remains the output;
-- relevant examples/tests pass;
-- scientific semantics are explicit where needed;
+- scientific semantics remain explicit;
 - the result works at the intended display size;
 - no unnecessary abstraction was introduced.
 
-## Iteration rule
+## Promotion
 
-Prefer one causal change per iteration. If a plot is weak for several reasons, fix the highest-impact one, rerender, then reassess.
+A useful mechanism should first exist as a concrete solution.
 
-## Promotion rule
+Promote it to an ingredient only when the local decision repeats across use cases.
 
-A one-off solution stays an example until repeated use proves a stable abstraction. A pattern becomes a recipe/component only after it generalizes beyond the originating figure.
+Promote a composition to a recipe only when the full reader problem and the composition both repeat.
+
+A one-off composition stays one-off.
 
 ## Architecture rule
 
-The default answer to "should this become a framework?" is no.
+If the simple recipe or direct ingredient composition already works, stop.

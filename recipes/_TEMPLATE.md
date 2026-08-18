@@ -1,36 +1,37 @@
 ---
 recipe: example_name
-intents: [comparison]
+question: What recurring reader problem does this solve?
+ingredients: [example]
 ---
 
 # Recipe name
 
 ## Use when
 
-State the reader question this mechanism answers.
+State the reader question this prepared solution answers.
 
-## Required semantics
+## Default composition
 
-List only the facts that can change the representation.
+List the smallest set of ingredients that normally solves it.
 
-## Base mechanism
+## Ask only if material
 
-Describe the minimal native plotting structure.
+List unknowns that would change the recipe, not cosmetic preferences.
 
-## Useful components
+## Adapt
 
-- uncertainty
-- highlight
-- reference_line
+Describe the main substitution or extension points.
 
-## Failure modes
+A recipe should remain useful when optional ingredients change.
 
-List the common ways this recipe becomes misleading or unreadable.
+## Avoid
 
-## Destination notes
+List the common ways this recipe becomes misleading, overbuilt, or inappropriate.
 
-Only note differences that materially change paper/slides/screen/exploratory rendering.
+## Native shape
+
+Show only enough ordinary Matplotlib, Seaborn, or Plotly to make the default concrete.
 
 ## Promotion evidence
 
-Record the originating example and the second dataset/use case that demonstrated generality.
+Record the originating use case and at least one second dataset/use case that demonstrated the composition is recurring.

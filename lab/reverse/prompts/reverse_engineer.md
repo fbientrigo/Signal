@@ -1,17 +1,17 @@
 # Reverse-engineer a chart into Signal knowledge
 
-Goal: reproduce the chart's useful visual mechanism in native Python, then extract reusable Signal units.
+Goal: reproduce the chart's useful visual reasoning in native Python, then identify reusable ingredients or a recurring recipe.
 
 1. Inspect the image before writing code.
-2. State the chart's likely visual intent in one sentence.
+2. State the likely reader question in one sentence.
 3. Identify the likely destination if it matters.
-4. Decompose marks, encodings, transforms, axes/scales, uncertainty, layout, context, emphasis, annotation, palette, and typography.
-5. Mark scientifically important unknowns explicitly; do not infer uncertainty semantics from appearance alone.
-6. Map the decomposition to the smallest existing Signal recipe + components.
-7. If an important mechanism has no representation, keep it as a provisional component candidate rather than inventing a large recipe.
+4. Record supported data semantics and keep important unknowns explicit.
+5. Decompose marks, encodings, transforms, axes/scales, uncertainty, layout, context, emphasis, annotation, palette, and typography.
+6. Map local reusable decisions to the smallest existing Signal ingredients.
+7. Use an existing recipe only if the complete reader problem fits it; otherwise compose ingredients directly.
 8. Reproduce with ordinary Matplotlib, Seaborn, or Plotly code.
-9. Render on a fixed canvas and compare against the reference using `reverse_score.py` plus visual inspection.
+9. Inspect at the intended size and use `reverse_score.py` only as an appearance aid.
 10. Change one high-impact mismatch per iteration.
-11. Separate source-specific style from reusable structure.
-12. Test the reusable mechanism on a second dataset.
-13. Promote only if it generalizes.
+11. Separate source-specific style from reusable visual reasoning.
+12. Promote a new ingredient only when the local decision repeats.
+13. Promote a recipe only when the reader problem and composition both repeat.

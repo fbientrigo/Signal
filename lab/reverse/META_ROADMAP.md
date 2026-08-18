@@ -2,14 +2,15 @@
 
 ## Principle
 
-Use ML only where a learned model buys something that recipes + a strong host VLM + deterministic scoring do not.
+Use ML only where a learned model buys something that recipes + ingredients + a strong host VLM + deterministic tooling do not.
 
 ## R0 — host VLM + native code + cheap rendered reward
 
 Acceptance:
 
 - reproduce useful mechanisms from screenshots;
-- extract reusable components;
+- decompose reusable ingredients;
+- recognize when an existing recipe fits;
 - no model training required.
 
 ## R1 — benchmark the loop
@@ -23,7 +24,7 @@ Build a small evaluation set from permissively usable examples and self-generate
 5. human edit count;
 6. tokens/iterations.
 
-Use ChartMimic/Plot2Code metrics as references where practical rather than inventing one opaque score.
+Use established chart-to-code metrics as references where practical rather than inventing one opaque score.
 
 ## R2 — optional specialized extractor
 
@@ -33,26 +34,17 @@ Compare the host VLM against specialized open chart-to-code models when licensin
 
 Add a factorized learned similarity scorer only if deterministic structure/color/edge scores fail to rank candidate edits usefully.
 
-```text
-R = w_structure R_structure
-  + w_attribute R_attribute
-  + w_visual R_visual
-  + w_exec R_exec
-```
-
 Do not collapse scientific correctness into visual similarity.
 
 ## R4 — training / RL
 
 Only after a Signal-native corpus exists:
 
-1. retrieval/few-shot recipes;
+1. retrieval/few-shot recipes and ingredients;
 2. supervised fine-tuning;
 3. preference optimization;
-4. RL/GRPO with factorized chart-similarity reward if earlier stages plateau.
-
-ChartMaster is the main prior for this final step. Borrow the idea only when Signal's own evaluation shows that the added complexity is justified.
+4. RL with factorized chart-similarity reward if earlier stages plateau.
 
 ## Stop rule
 
-If a cheaper stage achieves the desired first-pass reproduction quality and recipe extraction rate, do not escalate.
+If a cheaper stage achieves the desired first-pass reproduction quality and reusable-knowledge extraction rate, do not escalate.
