@@ -1,0 +1,2 @@
+Adapt the same figure for slides.
+Preserve the data, uncertainty definition, and visual encoding.
