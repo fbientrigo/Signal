@@ -1,0 +1,3 @@
+Compare the detector channels for a paper. `low` and `high` are uncertainty bounds around `estimate`, but their statistical meaning is not specified in the data.
+
+Save runnable plotting code as plot.py and render the result as plot.png.
