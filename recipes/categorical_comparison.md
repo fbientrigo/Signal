@@ -22,10 +22,13 @@ Order categories by a domain-defined sequence or by value when ranking is the ac
 
 Clarify whether category order has domain meaning and whether one category is a deliberate focus.
 
+If uncertainty is present but its meaning is not known, clarify the uncertainty definition before labeling or transforming it.
+
 ## Adapt
 
 - many categories → horizontal orientation;
 - one benchmark/focus → add restrained emphasis;
+- provided uncertainty → add `uncertainty` and preserve its definition and asymmetry;
 - repeated subgroups → consider `layout` instead of clustered visual clutter.
 
 ## Avoid
