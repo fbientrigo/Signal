@@ -1,26 +1,29 @@
 # Signal Reverse
 
-Experimental lane for learning reusable visual mechanisms from existing figures without turning Signal into a heavy vision product.
+Experimental lane for learning reusable visual knowledge from existing figures without turning Signal into a heavy vision product.
 
 ## Goal
 
 ```text
 reference figure
       ↓
-visual decomposition
+reader question + semantics
       ↓
-recipe + component hypothesis
+ingredient decomposition
       ↓
-native Python reconstruction
-      ↓
-render and compare
-      ↓
-one causal correction
-      ↺
-      ↓
-second-dataset test
-      ↓
-promote reusable knowledge
+existing recipe fit?
+   ↙             ↘
+ yes              no
+ ↓                 ↓
+adapt recipe     compose ingredients
+      ↘             ↙
+       native Python reconstruction
+                ↓
+       inspect and refine
+                ↓
+         second use case
+                ↓
+ promote only recurring knowledge
 ```
 
 The first extractor is the multimodal model already available to the coding agent. Do not require a local model for ordinary reverse engineering.
@@ -30,25 +33,28 @@ The first extractor is the multimodal model already available to the coding agen
 ## Workflow
 
 1. State the likely reader question.
-2. Identify the likely destination if it is visible or known.
-3. Decompose marks, encodings, transforms, axes/scales, uncertainty, layout, context, emphasis, annotation, palette, and typography.
-4. Keep scientifically important unknowns explicit.
-5. Map the figure to the smallest existing recipe + components.
-6. Reproduce it with native Python.
-7. Render on a fixed canvas and compare visually plus `reverse_score.py`.
-8. Change one high-impact mismatch per iteration.
-9. Separate the reusable mechanism from source-specific styling.
-10. Test the proposed reusable unit on a second dataset.
-11. Promote only when it satisfies `CONTRACT.md`.
+2. Identify the likely destination if known.
+3. Record only scientifically meaningful semantics that can be supported.
+4. Decompose marks, encodings, transforms, axes/scales, uncertainty, layout, context, emphasis, annotation, palette, and typography.
+5. Map reusable local decisions to existing ingredients.
+6. Use an existing recipe only when the complete reader problem fits it.
+7. Otherwise compose ingredients directly.
+8. Reproduce with ordinary Matplotlib, Seaborn, or Plotly.
+9. Inspect at target size and use deterministic comparison only as supporting evidence.
+10. Change one high-impact mismatch per iteration.
+11. Separate source-specific style from reusable visual reasoning.
+12. Test reusable knowledge on another use case before promotion.
+
+## Learning rule
+
+A newly observed local mechanism may become an ingredient.
+
+A recurring stable composition may become a recipe.
+
+A one-off combination remains an example.
 
 ## ML/RL direction
 
-ML and RL are optional escalation paths, not core dependencies. The order is:
-
-1. host VLM + deterministic scoring;
-2. benchmark the loop;
-3. evaluate specialized chart-to-code models only if they improve measured outcomes;
-4. add learned rewards only if deterministic rewards fail to rank useful edits;
-5. consider SFT/preference optimization/RL only after a Signal-native corpus exists.
+ML and RL are optional escalation paths, not core dependencies.
 
 See `META_ROADMAP.md`.

@@ -4,7 +4,7 @@ This file defines the rules that should remain stable while Signal evolves.
 
 ## Mission
 
-**Signal is a lightweight visual-reasoning skill that turns intent, data semantics, and display context into clear, editable, native Python figures.**
+**Signal is a lightweight visual-reasoning skill that turns a reader question, data semantics, and display context into clear, editable, native Python figures.**
 
 > Think deeply. Show simply.
 
@@ -13,23 +13,71 @@ This file defines the rules that should remain stable while Signal evolves.
 1. **Skill first.** Signal is knowledge and workflow before software.
 2. **Native output.** Emit Matplotlib, Seaborn, or Plotly directly.
 3. **No runtime lock-in.** A generated plot must run without Signal.
-4. **Simple stays simple.** Do not introduce schemas, registries, wrappers, or compilers for ordinary plots.
-5. **Intent before chart type when the decision matters.** First state what the reader should be able to see.
-6. **Destination is part of the design.** Paper, slides, screen, and exploration may require different typography, density, aspect ratio, and interaction.
-7. **Destination does not change scientific meaning.** Profiles change presentation, not data semantics.
-8. **Semantics stay explicit.** Preserve units, ordering, weights, missingness, transforms, sample structure, and uncertainty meaning when they affect interpretation.
-9. **Uncertainty is first-class.** SD, SE, confidence intervals, credible intervals, measurement uncertainty, bootstrap intervals, and model envelopes are not interchangeable.
-10. **Recipes describe base mechanisms.** Prefer `histogram`, `scatter`, `efficiency_curve`, not precomposed special cases.
-11. **Components are orthogonal.** Add uncertainty, context, highlights, references, annotations, normalization, facets, and interaction independently.
-12. **Color has a job.** Use it to encode meaning, establish context, or direct attention. Do not rely on color alone for essential distinctions.
-13. **Typography serves the destination.** Text must remain legible at the real display or publication size.
-14. **Interaction must answer a question.** Hover, filters, sliders, and toggles are not default decoration.
-15. **Scientific meaning outranks polish.** Do not hide exclusions, transformations, normalization, missing data, sample structure, or inconvenient observations.
-16. **Manual editing is expected.** Generated code should be easy to read and modify after Signal leaves the workflow.
-17. **Load knowledge on demand.** Keep `SKILL.md` short. Open recipes, components, and references only when relevant.
-18. **Learn by distillation, not copying.** Reproduce the useful mechanism of an example, separate reusable structure from source-specific style, then test it on a second dataset.
-19. **No hidden scientific inference.** If a distinction matters and the information is missing, state that it is missing.
-20. **No speculative abstraction.** Promote helpers or recipes only after repeated use demonstrates a stable need.
+4. **Clarify material ambiguity.** Ask the user when focus, context, noise, color meaning, uncertainty, normalization, or a valid transformation can change the visual decision. Do not ask cosmetic questions by default.
+5. **Semantics stay explicit.** Preserve units, ordering, weights, missingness, transforms, sample structure, and uncertainty meaning when they affect interpretation.
+6. **Ingredients solve local visual problems.** An ingredient is the smallest reusable unit that already contains useful visual reasoning. It is not merely a plotting parameter.
+7. **Recipes solve recurring reader problems.** A recipe is a prepared composition of ingredients with good defaults and explicit adaptation points.
+8. **Recipes are defaults, not a whitelist.** If a problem is unusual, compose ingredients directly rather than forcing a recipe.
+9. **Common tasks should be fast.** When a recipe clearly fits, use it and avoid unnecessary design exploration.
+10. **Special tasks should stay flexible.** Mix ingredients freely when the data or communication goal requires an ad hoc figure.
+11. **Avoid combinatorial recipes.** Do not create a recipe for every ingredient combination.
+12. **Keep the vocabulary small.** Add ingredients or recipes only when repeated use proves they save meaningful reasoning or prevent real mistakes.
+13. **Destination is part of design.** Paper, slides, screen, and exploration may require different typography, density, aspect ratio, and interaction.
+14. **Destination does not change scientific meaning.** Profiles change presentation, not data semantics.
+15. **Uncertainty is first-class.** SD, SE, confidence intervals, credible intervals, measurement uncertainty, bootstrap intervals, and model envelopes are not interchangeable.
+16. **Color has a job.** Use it to encode meaning, establish context, or direct attention. Do not rely on color alone for essential distinctions.
+17. **Scientific meaning outranks polish.** Do not hide exclusions, transformations, normalization, missing data, sample structure, or inconvenient observations.
+18. **Manual editing is expected.** Generated code should remain obvious to read and modify.
+19. **Load knowledge on demand.** Open only the recipe or ingredients relevant to the current question.
+20. **Learn by distillation, not copying.** Extract reusable mechanisms from examples and discard source-specific visual identity.
+
+## What counts as an ingredient
+
+An ingredient answers a local question such as:
+
+- how should this numeric or categorical scale behave?
+- how should weighted observations be represented?
+- how should uncertainty be shown?
+- how should color encode categories or a continuous value?
+- how should a focus subset remain visible against context?
+- how should a 2D field or dense relationship be displayed?
+
+An ingredient may include a small native code pattern, but its value is the reasoning and guardrails around that pattern.
+
+Do not create ingredients for low-level parameters such as a particular linewidth, marker size, legend location, or hex color.
+
+## What counts as a recipe
+
+A recipe answers a complete recurring reader question, for example:
+
+- what is the shape of this distribution?
+- how are these two variables related?
+- how do category magnitudes compare?
+- how does an estimate change while preserving uncertainty?
+- how does the focus differ from its context?
+
+A recipe should name its default ingredients, state what must be known, and show where it can adapt.
+
+It must remain valid when optional ingredients are added, removed, or substituted.
+
+## Promotion rule
+
+Promote a new **ingredient** only when:
+
+1. it solves a real local visual decision;
+2. the decision appears in more than one kind of figure or use case;
+3. it is easy to repeat incorrectly or costly to reason through repeatedly;
+4. it can be stated compactly without becoming a plotting wrapper.
+
+Promote a new **recipe** only when:
+
+1. it answers a recurring reader problem;
+2. a stable composition of existing ingredients solves that problem well;
+3. it works on at least one second dataset or use case;
+4. it provides a useful default without restricting later composition;
+5. the recipe saves enough repeated reasoning to justify its name.
+
+A one-off composition stays a one-off composition.
 
 ## Output modes
 
@@ -49,17 +97,7 @@ The target project owns all generated code.
 - no rendering engine;
 - no autonomous EDA system;
 - no general chart recommendation solver;
+- no large chart taxonomy;
 - no required local ML model;
 - no multi-agent framework;
 - no styling system that overrides project needs.
-
-## Promotion rule
-
-A visual pattern becomes a reusable Signal recipe or component only when:
-
-1. it answers a clear visual intent;
-2. it reproduces a useful mechanism, not merely a visual style;
-3. the reusable part can be stated independently of the source example;
-4. it works on at least one second dataset or use case;
-5. it composes with existing pieces without special-case naming;
-6. it saves enough repeated reasoning or code to justify its existence.

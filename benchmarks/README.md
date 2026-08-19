@@ -1,88 +1,107 @@
-# Signal Benchmark v0
+# Signal Benchmark v1
 
-Pilot experiment, not a framework. Full rationale, fairness controls, and
-metric definitions live in the design decision this scaffold implements —
-keep that document as the source of truth; this README only orients the
-files.
+Small outcome benchmark for one question:
 
-## Question
+> Does Signal improve first-attempt scientific visualization decisions beyond a capable LLM given a concise scientific-plotting brief?
 
-Does Signal increase the probability of producing a scientifically
-acceptable figure on the first attempt, without making trivial plots worse
-or harder to edit?
+This is a benchmark scaffold, not a benchmark framework.
 
-## Matrix
+## Conditions
+
+Both conditions receive, in the same order:
+
+1. `common_brief.txt`;
+2. the case prompt;
+3. the same data and output contract.
+
+The only condition difference is Signal availability:
+
+- **baseline** — no Signal repository or skill files are visible;
+- **Signal** — the tested Signal skill is available at a recorded commit SHA.
+
+The common brief is deliberate. Signal should not win merely because one condition was told to preserve semantics while the other was only told to make something pretty.
+
+## Run sizes
+
+Fast architecture check:
 
 ```text
-temperature    baseline x3, Signal x3
-plant_growth   baseline x3, Signal x3  + standardized edit on all 6
-ab_experiment  baseline x3, Signal x3
+7 cases × 2 conditions × 1 run = 14 first-pass runs
 ```
 
-18 first-pass runs + 6 edit operations.
+Use 3 independent repetitions per condition only when estimating stability for a larger decision.
 
-## Output contract (identical for baseline and Signal)
+## Output contract
 
-Every run saves runnable plotting code as `plot.py` and renders the result
-as `plot.png`. This is benchmark plumbing, not extra Signal guidance, and
-must not appear only in one condition.
+Every completed plotting run saves runnable native Python as `plot.py` and renders `plot.png`.
 
-## Metrics (per run)
+A material clarification may occur before the first render. When a case provides `clarification.txt`, use that canned answer verbatim if the agent asks the relevant question. This does not count as a corrective turn.
 
-- `execution_pass` — P0, gate. Does `plot.py` run clean and produce `plot.png`?
-- `scientific_integrity_pass` — P0, gate. Case-specific checks in that
-  case's `acceptance.md`.
-- `accept@1` — P0. `execution_pass AND scientific_integrity_pass AND`
-  blind human acceptance ("would I use this without asking for a change?").
-- tokens / cost / wall-clock — P1, recorded when reliably exposed.
-- edit metrics (plant_growth only) — P1, see `cases/plant_growth/edit.txt`.
+## Primary measurements
 
-No composite score. Report per case: `accept@1`, integrity, execution,
-tokens, edit — as separate columns, not one weighted number.
+`execution_pass` is a gate, not Signal's value proposition.
 
-## Fairness controls (freeze before comparing results)
+Measure Signal on five dimensions:
 
-- Same agent/product, model configuration, reasoning level, tools, network
-  permissions, Python environment across both conditions.
-- Same data and prompt; only Signal-skill availability differs.
-- Fresh workspace per run, no prior run outputs visible.
-- Baseline has no Signal documentation available.
-- No human correction before `accept@1` is recorded.
-- Randomize baseline/Signal order; run paired conditions close in time.
-- 3 independent repetitions per condition.
-- Record Signal commit SHA, model/product/config, timestamp.
-- Preserve prompt, data, code, render, stdout/stderr, transcript.
-- An unexpected model/config fallback invalidates that run — don't include
-  it silently.
+1. **scientific integrity** — `scientific_integrity_pass` plus `semantic_error_count`;
+2. **clarification quality** — `clarification_quality` = pass/fail/NA: asks a material question when required and does not block on cosmetic preferences;
+3. **first-attempt usefulness** — `accept@1`: first rendered figure passes execution, scientific integrity, and blind human acceptance;
+4. **correction burden** — `corrective_turns_needed`: user correction turns after the first render until acceptance;
+5. **native editability** — `native_editable_pass`: ordinary Matplotlib/Seaborn/Plotly code, no Signal runtime dependency, straightforward to modify locally.
+
+Record tokens, cost, and wall-clock as secondary efficiency metrics when reliably exposed. Do not combine metrics into one weighted score.
+
+## Scientific scoring
+
+Each case freezes CRITICAL criteria before runs.
+
+A visually attractive figure fails scientific integrity if it silently changes or loses semantics. Count each distinct critical semantic failure in `semantic_error_count`, for example:
+
+- dropping asymmetric uncertainty;
+- ignoring weights;
+- changing normalization;
+- hiding invalid values through a transform;
+- interpolating where only evaluated points are meaningful.
+
+Review `accept@1` blind to condition.
 
 ## Cases
 
-Each case isolates a different reason Signal might help, not coverage:
+The suite is intentionally small and adversarial:
 
-- `cases/temperature/` — control. Easy case; Signal should be neutral.
-- `cases/plant_growth/` — semantics + uncertainty + destination, with
-  deliberately asymmetric confidence intervals.
-- `cases/ab_experiment/` — derived-quantity challenge: raw conversion
-  counts aren't comparable when denominators differ.
+- `temperature/` — easy control; Signal should be neutral;
+- `plant_growth/` — ordered trend + asymmetric uncertainty + paper destination;
+- `ab_experiment/` — derived quantity / denominator semantics;
+- `categorical_uncertainty/` — routine categorical comparison with uncertainty that requires one semantic clarification;
+- `weighted_signal_background/` — weighted distributions, explicit yield normalization, statistical uncertainty, meaningful tail;
+- `misleading_transform/` — transformation temptation with zero/negative values that must not disappear;
+- `irregular_parameter_scan/` — unusual scientific 2D scan where only evaluated points are meaningful.
 
-Each `acceptance.md` was frozen before any run and separates CRITICAL from
-NICE TO HAVE. The reviewer scores blind to condition. If a criterion turns
-out ambiguous, revise the rubric and rerun that case — don't rescore after
-the fact.
+These cases test the architecture, not chart-family coverage.
+
+## Fairness controls
+
+- Same agent/product, model configuration, reasoning level, tools, network permissions, and Python environment across conditions.
+- Same common brief, data, case prompt, clarification answer, and output contract.
+- Fresh workspace per run; no prior outputs visible.
+- Baseline has no Signal documentation available.
+- No human correction before `accept@1`; only frozen pre-render clarification is allowed.
+- Randomize condition order and run paired conditions close in time.
+- Record Signal commit SHA, model/product/config, timestamp, and prompt artifacts.
+- Preserve code, render, stdout/stderr, and transcript.
+- Unexpected model/config fallback invalidates the run.
 
 ## Runs
 
-`runs/<run-id>/` holds the raw artifacts for one run:
+`runs/<run-id>/` holds raw artifacts:
 
 ```text
-run.json      # condition, model/config, commit SHA, timestamp, tokens, cost
+run.json
 transcript.txt
 plot.py
 plot.png
 stdout.txt
-score.json    # execution_pass, scientific_integrity_pass, accept@1, notes
+score.json
 ```
 
-No runner, database, dashboard, or judge yet. If manually executing 18
-runs becomes the dominant source of error, that's what justifies a small
-runner — not before.
+Do not add a runner, judge, dashboard, or database until manual execution itself becomes the measured bottleneck.

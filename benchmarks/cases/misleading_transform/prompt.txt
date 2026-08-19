@@ -1,0 +1,3 @@
+Plot sensor response versus dose for a paper. The dose spans several orders of magnitude, so a logarithmic scale may look useful.
+
+Save runnable plotting code as plot.py and render the result as plot.png.

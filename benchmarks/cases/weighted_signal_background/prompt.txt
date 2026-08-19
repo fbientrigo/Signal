@@ -1,0 +1,3 @@
+Compare the signal and background score distributions for a paper. `weight` is the fixed per-event contribution to expected yield for the same target exposure. Preserve weighted yield; do not normalize either sample to unit area. Treat event contributions as independent for statistical uncertainty. The tail above score = 0.8 is scientifically important.
+
+Save runnable plotting code as plot.py and render the result as plot.png.

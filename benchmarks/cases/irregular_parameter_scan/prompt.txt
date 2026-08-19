@@ -1,0 +1,3 @@
+Show where selection efficiency is high in this irregular mass-lifetime parameter scan and distinguish points excluded by theory. Only the evaluated parameter points are scientifically defined; do not infer values between them. This is for a paper.
+
+Save runnable plotting code as plot.py and render the result as plot.png.
