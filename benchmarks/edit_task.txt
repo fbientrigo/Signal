@@ -1,0 +1,38 @@
+STANDARDIZED EDIT TASK — frozen before first use
+=================================================
+
+Apply the following changes to the generated figure code.
+
+Changes:
+  title      -> "Edited benchmark figure"
+  x label    -> "Edited X"
+  y label    -> "Edited Y"
+  palette    -> replace ALL user-facing colors with the Tol muted palette:
+                #332288, #88CCEE, #44AA99, #117733, #999933,
+                #DDCC77, #CC6677, #882255, #AA4499
+                Map existing color assignments to these values in order of
+                first appearance. If fewer than 9 colors are used, use the
+                first N values from this list. If more than 9 are needed,
+                cycle.
+
+Preserve:
+  - all data arrays and their values;
+  - all transformations, normalization, and weighting;
+  - all uncertainty calculations and display;
+  - all statistical computations;
+  - plot structure (number of axes, subplot layout) unless a structural
+    change is strictly necessary for the palette swap;
+  - axis scales (linear, log, etc.);
+  - meaningful category ordering.
+
+Do not redesign the figure.
+
+After editing, the figure must still execute and produce a valid image.
+Verify that:
+  1. the title reads exactly "Edited benchmark figure";
+  2. the x-axis label reads exactly "Edited X";
+  3. the y-axis label reads exactly "Edited Y";
+  4. all user-facing colors are drawn from the Tol muted palette above;
+  5. no data, uncertainty, or statistical semantics have changed.
+
+This task is identical for all harnesses (AGY, Codex, Claude Code).
