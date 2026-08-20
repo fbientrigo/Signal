@@ -43,7 +43,7 @@ def find_violations(workspace: Path, agent: str, condition: str) -> list[str]:
     other_skill_roots = {SKILL_ROOT_BY_AGENT[a].split("/")[0] for a in AGENTS} - {own_skill_root}
 
     if condition == "baseline":
-        for forbidden in ("SKILL.md", "CONTRACT.md", "recipes", "components", "references", "themes", "intents"):
+        for forbidden in ("SKILL.md", "CONTRACT.md", "recipes", "ingredients", "components", "references", "themes", "intents"):
             if forbidden in names_present:
                 violations.append(f"baseline workspace can see Signal: {forbidden}")
         for root in {own_skill_root} | other_skill_roots:

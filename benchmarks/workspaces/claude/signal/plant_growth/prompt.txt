@@ -1,3 +1,0 @@
-Plot this for a paper.
-
-Save runnable plotting code as plot.py and render the result as plot.png.
