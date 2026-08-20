@@ -5,7 +5,7 @@
   "case": "irregular_parameter_scan",
   "condition": "baseline",
   "signal_commit": "NA",
-  "timestamp": "2026-08-19T20:43:00Z",
+  "timestamp": "2026-08-19T21:21:59Z",
   "run_id": "irregular_parameter_scan_baseline_c6677f",
   "scientific": {
     "execution_pass": true,
@@ -22,11 +22,11 @@
     "helper_function_count": 0
   },
   "edit": {
-    "success": null,
-    "regression": null,
-    "lines_touched": null,
-    "corrective_turns": null,
-    "wall_clock_seconds": null
+    "success": true,
+    "regression": false,
+    "lines_touched": 22,
+    "corrective_turns": 0,
+    "wall_clock_seconds": 5.2
   },
   "tokens": {
     "generation": {
@@ -44,8 +44,7 @@
     "source": "not_exposed"
   },
   "visual_economy": {
-    "question_fit": null,
-    "unnecessary_structure_A": null,
-    "unnecessary_structure_B": null
+    "question_fit": "Tie",
+    "unnecessary_structure": "none"
   }
 }

@@ -1,0 +1,9 @@
+{
+  "run_id": "weighted_signal_background_baseline_af8377",
+  "case": "weighted_signal_background",
+  "condition": "baseline",
+  "signal_sha": null,
+  "model": "claude-opus-4-6-thinking",
+  "timestamp_utc": "2026-08-19T20:58:36Z",
+  "status": "completed"
+}

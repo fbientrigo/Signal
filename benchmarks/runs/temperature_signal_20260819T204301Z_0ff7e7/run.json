@@ -1,0 +1,11 @@
+{
+  "run_id": "temperature_signal_20260819T204301Z_0ff7e7",
+  "case": "temperature",
+  "condition": "signal",
+  "signal_sha": "1493d5e9ad02dac8aebc5aed7b38f0daf0cd1074",
+  "model": "claude-opus-4-6-thinking",
+  "timestamp_utc": "2026-08-19T20:43:01.762684+00:00",
+  "status": "prepared",
+  "analysis_status": "excluded",
+  "exclusion_reason": "pilot run with invalid/unproven workspace isolation"
+}

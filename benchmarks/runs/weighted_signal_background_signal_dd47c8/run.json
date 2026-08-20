@@ -1,0 +1,9 @@
+{
+  "run_id": "weighted_signal_background_signal_dd47c8",
+  "case": "weighted_signal_background",
+  "condition": "signal",
+  "signal_sha": "1493d5e9ad02dac8aebc5aed7b38f0daf0cd1074",
+  "model": "claude-opus-4-6-thinking",
+  "timestamp_utc": "2026-08-19T20:58:36Z",
+  "status": "completed"
+}

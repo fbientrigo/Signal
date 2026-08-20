@@ -3,11 +3,10 @@
   "model": "claude-opus-4-6-thinking",
   "model_configuration": "NA",
   "case": "temperature",
-  "condition": "baseline",
-  "signal_commit": "NA",
-  "timestamp": "2026-08-19T20:43:10Z",
-  "run_id": "temperature_baseline_20260819T204310Z_1636f4",
-
+  "condition": "signal",
+  "signal_commit": "1493d5e9ad02dac8aebc5aed7b38f0daf0cd1074",
+  "timestamp": "2026-08-19T20:43:01Z",
+  "run_id": "temperature_signal_20260819T204301Z_0ff7e7",
   "scientific": {
     "execution_pass": true,
     "integrity_pass": true,
@@ -17,13 +16,11 @@
     "corrective_turns_needed": 0,
     "native_editable_pass": true
   },
-
   "economy": {
-    "plot_loc": 35,
+    "plot_loc": 37,
     "number_of_axes": 1,
     "helper_function_count": 0
   },
-
   "edit": {
     "success": null,
     "regression": null,
@@ -31,7 +28,6 @@
     "corrective_turns": null,
     "wall_clock_seconds": null
   },
-
   "tokens": {
     "generation": {
       "input": null,
@@ -47,10 +43,11 @@
     },
     "source": "not_exposed"
   },
-
   "visual_economy": {
     "question_fit": null,
     "unnecessary_structure_A": null,
     "unnecessary_structure_B": null
-  }
+  },
+  "analysis_status": "excluded",
+  "exclusion_reason": "pilot run with invalid/unproven workspace isolation"
 }

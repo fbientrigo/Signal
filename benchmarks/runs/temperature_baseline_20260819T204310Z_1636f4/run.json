@@ -1,0 +1,11 @@
+{
+  "run_id": "temperature_baseline_20260819T204310Z_1636f4",
+  "case": "temperature",
+  "condition": "baseline",
+  "signal_sha": null,
+  "model": "claude-opus-4-6-thinking",
+  "timestamp_utc": "2026-08-19T20:43:10.443224+00:00",
+  "status": "prepared",
+  "analysis_status": "excluded",
+  "exclusion_reason": "pilot run with invalid/unproven workspace isolation"
+}

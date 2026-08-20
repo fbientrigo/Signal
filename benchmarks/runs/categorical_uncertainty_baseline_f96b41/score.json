@@ -1,0 +1,10 @@
+{
+  "execution_pass": true,
+  "scientific_integrity_pass": false,
+  "semantic_error_count": 1,
+  "accept_at_1": false,
+  "native_editable_pass": true,
+  "clarification_quality": "missed",
+  "corrective_turns_needed": 1,
+  "run_id": "categorical_uncertainty_baseline_f96b41"
+}

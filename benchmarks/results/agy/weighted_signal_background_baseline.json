@@ -5,9 +5,8 @@
   "case": "weighted_signal_background",
   "condition": "baseline",
   "signal_commit": "NA",
-  "timestamp": "2026-08-19T20:43:03Z",
-  "run_id": "weighted_signal_background_baseline_20260819T204303Z_7808ea",
-
+  "timestamp": "2026-08-19T20:58:36Z",
+  "run_id": "weighted_signal_background_baseline_af8377",
   "scientific": {
     "execution_pass": true,
     "integrity_pass": true,
@@ -17,21 +16,18 @@
     "corrective_turns_needed": 0,
     "native_editable_pass": true
   },
-
   "economy": {
-    "plot_loc": 172,
+    "plot_loc": 251,
     "number_of_axes": 4,
     "helper_function_count": 1
   },
-
   "edit": {
-    "success": null,
-    "regression": null,
-    "lines_touched": null,
-    "corrective_turns": null,
-    "wall_clock_seconds": null
+    "success": true,
+    "regression": false,
+    "lines_touched": 32,
+    "corrective_turns": 0,
+    "wall_clock_seconds": 7.4
   },
-
   "tokens": {
     "generation": {
       "input": null,
@@ -47,10 +43,8 @@
     },
     "source": "not_exposed"
   },
-
   "visual_economy": {
-    "question_fit": null,
-    "unnecessary_structure_A": null,
-    "unnecessary_structure_B": null
+    "question_fit": "Signal",
+    "unnecessary_structure": "substantial"
   }
 }

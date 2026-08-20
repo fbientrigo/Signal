@@ -1,0 +1,9 @@
+{
+  "run_id": "irregular_parameter_scan_signal_bc06cb",
+  "case": "irregular_parameter_scan",
+  "condition": "signal",
+  "signal_sha": "1493d5e9ad02dac8aebc5aed7b38f0daf0cd1074",
+  "model": "claude-opus-4-6-thinking",
+  "timestamp_utc": "2026-08-19T21:21:59Z",
+  "status": "completed"
+}

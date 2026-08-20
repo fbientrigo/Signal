@@ -1,0 +1,11 @@
+{
+  "run_id": "temperature_signal_20260819T204301Z_0ff7e7",
+  "execution_pass": true,
+  "scientific_integrity_pass": true,
+  "semantic_error_count": 0,
+  "clarification_quality": "NA",
+  "accept_at_1": true,
+  "corrective_turns_needed": 0,
+  "native_editable_pass": true,
+  "notes": "Clean line plot with markers, explicit sort for chronological order, °C units, freezing point reference, sensible tick spacing. Signal-guided but approximately equivalent to baseline."
+}

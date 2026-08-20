@@ -1,0 +1,11 @@
+Make a scientifically sound visualization that preserves the meaning of the supplied data. If missing information can materially change the interpretation, ask a focused question rather than inventing an assumption. Keep the result as ordinary, editable Python using Matplotlib, Seaborn, or Plotly.
+
+Show where selection efficiency is high in this irregular mass-lifetime parameter scan and distinguish points excluded by theory. Only the evaluated parameter points are scientifically defined; do not infer values between them. This is for a paper.
+
+Save runnable plotting code as plot.py and render the result as plot.png.
+
+OUTPUT CONTRACT:
+- Write your complete, runnable plotting code directly to plot.py
+- Execute plot.py to produce plot.png
+- The first rendered figure is your attempt 1 submission
+- Do NOT create intermediate test scripts or scratch files

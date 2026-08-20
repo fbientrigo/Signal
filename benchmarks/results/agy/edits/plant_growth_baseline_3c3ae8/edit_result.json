@@ -1,0 +1,17 @@
+{
+  "run_id": "plant_growth_baseline_3c3ae8",
+  "case": "plant_growth",
+  "condition": "baseline",
+  "edit_success": true,
+  "edit_regression": false,
+  "lines_touched": 12,
+  "corrective_turns": 0,
+  "wall_clock_seconds": 9.586,
+  "checks": {
+    "title_is_edited_benchmark_figure": true,
+    "xlabel_is_edited_x": true,
+    "ylabel_is_edited_y": true,
+    "tol_palette_used": true,
+    "semantics_preserved": true
+  }
+}

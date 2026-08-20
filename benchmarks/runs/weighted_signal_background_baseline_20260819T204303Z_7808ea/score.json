@@ -1,0 +1,11 @@
+{
+  "run_id": "weighted_signal_background_baseline_20260819T204303Z_7808ea",
+  "execution_pass": true,
+  "scientific_integrity_pass": true,
+  "semantic_error_count": 0,
+  "clarification_quality": "NA",
+  "accept_at_1": true,
+  "corrective_turns_needed": 0,
+  "native_editable_pass": true,
+  "notes": "3-panel publication figure. Uses weights correctly, sqrt(sum(w^2)) for uncertainty. Tail visible and highlighted. Overlapping bar histograms (not step) make overlap comparison slightly harder but legible. More elaborate than necessary (238 lines, 3 panels for a task that asked for distribution comparison). Scientifically correct."
+}

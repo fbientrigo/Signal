@@ -28,9 +28,8 @@ python benchmarks/scripts/prepare_workspace.py \
 
 ### 2. Run each case
 
-For each of the 7 cases:
+For each of the 6 valid benchmark cases:
 
-- temperature
 - plant_growth
 - ab_experiment
 - categorical_uncertainty

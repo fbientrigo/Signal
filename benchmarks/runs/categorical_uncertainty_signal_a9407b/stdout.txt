@@ -1,0 +1,1 @@
+findfont: Failed to find font weight medium, now using 400.

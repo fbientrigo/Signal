@@ -1,0 +1,11 @@
+{
+  "run_id": "weighted_signal_background_signal_20260819T204311Z_b5df62",
+  "execution_pass": true,
+  "scientific_integrity_pass": true,
+  "semantic_error_count": 0,
+  "clarification_quality": "NA",
+  "accept_at_1": true,
+  "corrective_turns_needed": 0,
+  "native_editable_pass": true,
+  "notes": "Single-panel step histogram with error bars and tail callout. Uses weights correctly, sqrt(sum(w^2)) for uncertainty explicitly labeled in subtitle. Step histogram form makes overlap comparison cleaner. Tail visible and annotated. More focused and compact (201 lines, single figure). Scientifically correct."
+}

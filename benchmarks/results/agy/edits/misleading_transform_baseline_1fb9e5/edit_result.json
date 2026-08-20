@@ -1,0 +1,17 @@
+{
+  "run_id": "misleading_transform_baseline_1fb9e5",
+  "case": "misleading_transform",
+  "condition": "baseline",
+  "edit_success": true,
+  "edit_regression": false,
+  "lines_touched": 14,
+  "corrective_turns": 0,
+  "wall_clock_seconds": 5.273,
+  "checks": {
+    "title_is_edited_benchmark_figure": true,
+    "xlabel_is_edited_x": true,
+    "ylabel_is_edited_y": true,
+    "tol_palette_used": true,
+    "semantics_preserved": true
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "run_id": "categorical_uncertainty_baseline_f96b41",
+  "case": "categorical_uncertainty",
+  "condition": "baseline",
+  "signal_sha": null,
+  "model": "claude-opus-4-6-thinking",
+  "timestamp_utc": "2026-08-19T21:21:59Z",
+  "status": "completed"
+}

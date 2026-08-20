@@ -1,0 +1,17 @@
+{
+  "run_id": "irregular_parameter_scan_signal_bc06cb",
+  "case": "irregular_parameter_scan",
+  "condition": "signal",
+  "edit_success": true,
+  "edit_regression": false,
+  "lines_touched": 19,
+  "corrective_turns": 0,
+  "wall_clock_seconds": 4.827,
+  "checks": {
+    "title_is_edited_benchmark_figure": true,
+    "xlabel_is_edited_x": true,
+    "ylabel_is_edited_y": true,
+    "tol_palette_used": true,
+    "semantics_preserved": true
+  }
+}

@@ -1,0 +1,9 @@
+C:\Users\Asus\.gemini\antigravity-cli\brain\2e5fc834-dd2c-4d2e-8be6-14c38974dd26\scratch\benchmark_hardened\workspaces\weighted_signal_background_baseline_af8377\plot.py:201: SyntaxWarning: invalid escape sequence '\%'
+  ax_ratio.axhline(0.5, color='#888888', linestyle=':', linewidth=1.2, zorder=2, label='Equal Yield ($S = B, 50\%$)')
+Successfully generated C:\Users\Asus\.gemini\antigravity-cli\brain\2e5fc834-dd2c-4d2e-8be6-14c38974dd26\scratch\benchmark_hardened\workspaces\weighted_signal_background_baseline_af8377\plot.png
+Total Signal Yield: 11.60 +/- 3.56
+Total Background Yield: 15.45 +/- 4.83
+Tail (>= 0.8) Signal Yield: 4.60 +/- 2.33 (39.7%)
+Tail (>= 0.8) Background Yield: 1.05 +/- 0.64 (6.8%)
+Tail S/B: 4.38 +/- 3.48
+Tail Signal Purity: 81.4% +/- 12.0%

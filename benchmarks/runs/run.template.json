@@ -1,0 +1,16 @@
+{
+  "run_id": "plant_growth-claude-signal-1",
+  "case": "plant_growth",
+  "agent": "claude",
+  "condition": "signal",
+  "invocation": "implicit",
+  "model": null,
+  "signal_commit": null,
+  "started_at": null,
+  "completed_at": null,
+  "completed": false,
+  "tokens": null,
+  "cost_usd": null,
+  "wall_clock_s": null,
+  "notes": ""
+}

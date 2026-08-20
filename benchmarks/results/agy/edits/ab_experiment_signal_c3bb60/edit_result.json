@@ -1,0 +1,17 @@
+{
+  "run_id": "ab_experiment_signal_c3bb60",
+  "case": "ab_experiment",
+  "condition": "signal",
+  "edit_success": true,
+  "edit_regression": false,
+  "lines_touched": 20,
+  "corrective_turns": 0,
+  "wall_clock_seconds": 7.127,
+  "checks": {
+    "title_is_edited_benchmark_figure": true,
+    "xlabel_is_edited_x": true,
+    "ylabel_is_edited_y": true,
+    "tol_palette_used": true,
+    "semantics_preserved": true
+  }
+}

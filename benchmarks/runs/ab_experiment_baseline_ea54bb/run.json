@@ -1,0 +1,9 @@
+{
+  "run_id": "ab_experiment_baseline_ea54bb",
+  "case": "ab_experiment",
+  "condition": "baseline",
+  "signal_sha": null,
+  "model": "claude-opus-4-6-thinking",
+  "timestamp_utc": "2026-08-19T21:21:59Z",
+  "status": "completed"
+}

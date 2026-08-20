@@ -1,0 +1,5 @@
+Make a scientifically sound visualization that preserves the meaning of the supplied data. If missing information can materially change the interpretation, ask a focused question rather than inventing an assumption. Keep the result as ordinary, editable Python using Matplotlib, Seaborn, or Plotly.
+
+Plot this data.
+
+Save runnable plotting code as plot.py and render the result as plot.png.

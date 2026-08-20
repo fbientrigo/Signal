@@ -1,0 +1,11 @@
+{
+  "run_id": "weighted_signal_background_baseline_20260819T204303Z_7808ea",
+  "case": "weighted_signal_background",
+  "condition": "baseline",
+  "signal_sha": null,
+  "model": "claude-opus-4-6-thinking",
+  "timestamp_utc": "2026-08-19T20:43:03.227260+00:00",
+  "status": "prepared",
+  "analysis_status": "excluded",
+  "exclusion_reason": "not true first attempt (candidate renders generated before final plot.py)"
+}

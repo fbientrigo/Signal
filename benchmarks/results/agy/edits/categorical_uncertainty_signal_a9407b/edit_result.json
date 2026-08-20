@@ -1,0 +1,17 @@
+{
+  "run_id": "categorical_uncertainty_signal_a9407b",
+  "case": "categorical_uncertainty",
+  "condition": "signal",
+  "edit_success": true,
+  "edit_regression": false,
+  "lines_touched": 10,
+  "corrective_turns": 0,
+  "wall_clock_seconds": 4.031,
+  "checks": {
+    "title_is_edited_benchmark_figure": true,
+    "xlabel_is_edited_x": true,
+    "ylabel_is_edited_y": true,
+    "tol_palette_used": true,
+    "semantics_preserved": true
+  }
+}

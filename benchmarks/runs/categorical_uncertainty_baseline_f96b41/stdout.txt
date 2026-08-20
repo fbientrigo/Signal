@@ -1,0 +1,3 @@
+findfont: Failed to find font weight semibold, now using 700.
+findfont: Failed to find font weight medium, now using 400.
+Plot successfully saved to plot.png

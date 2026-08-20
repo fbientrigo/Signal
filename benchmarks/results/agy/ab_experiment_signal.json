@@ -5,7 +5,7 @@
   "case": "ab_experiment",
   "condition": "signal",
   "signal_commit": "1493d5e9ad02dac8aebc5aed7b38f0daf0cd1074",
-  "timestamp": "2026-08-19T20:43:00Z",
+  "timestamp": "2026-08-19T21:21:59Z",
   "run_id": "ab_experiment_signal_c3bb60",
   "scientific": {
     "execution_pass": true,
@@ -22,11 +22,11 @@
     "helper_function_count": 2
   },
   "edit": {
-    "success": null,
-    "regression": null,
-    "lines_touched": null,
-    "corrective_turns": null,
-    "wall_clock_seconds": null
+    "success": true,
+    "regression": false,
+    "lines_touched": 20,
+    "corrective_turns": 0,
+    "wall_clock_seconds": 7.13
   },
   "tokens": {
     "generation": {
@@ -44,8 +44,7 @@
     "source": "not_exposed"
   },
   "visual_economy": {
-    "question_fit": null,
-    "unnecessary_structure_A": null,
-    "unnecessary_structure_B": null
+    "question_fit": "Tie",
+    "unnecessary_structure": "none"
   }
 }
