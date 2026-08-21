@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: >-
+  If you use Signal in your work, please cite it using the metadata below.
+  Update this file once a release, DOI, or paper is available.
+title: Signal
+type: software
+authors:
+  - family-names: Trigo
+    given-names: Fabian
+repository-code: "https://github.com/fbientrigo/Signal"
+license: MIT

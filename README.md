@@ -176,6 +176,10 @@ Signal distills useful ideas from established visualization work, including Micr
 
 Signal borrows principles and mechanisms, not source-specific visual identities.
 
+## License
+
+Signal is MIT licensed. Use, adapt, and redistribute it with attribution and the license notice. Academic users can cite Signal via GitHub's citation metadata (see [`CITATION.cff`](CITATION.cff)).
+
 ## Status
 
 Early foundation. Keep the catalog small and validate the ingredients/recipes model with real plots before expanding it.

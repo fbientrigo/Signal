@@ -33,6 +33,16 @@ State `n` and the unit of replication when it changes interpretation.
 
 Do not symmetrize asymmetric intervals merely for convenience.
 
+## Residuals, ratios, and pulls
+
+Label the actual derived quantity instead of a generic term:
+
+- a residual (observed − predicted) usually references zero;
+- a ratio (observed / predicted) usually references one;
+- a pull ((observed − predicted) / uncertainty) references zero and is scaled by an uncertainty definition that should itself be stated.
+
+Do not call every lower comparison panel a "residual" — check whether it is actually a ratio or a pull, since the meaningful reference line and axis label differ for each.
+
 ## Raw observations
 
 Show raw observations when feasible and when they help reveal sample size, heterogeneity, or distribution shape. Do not jitter so aggressively that values/categories become ambiguous.

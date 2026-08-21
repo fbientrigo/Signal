@@ -44,4 +44,5 @@ ax.fill_between(x, lower, upper, alpha=0.18, linewidth=0)
 - preserve bounded or asymmetric intervals;
 - weighted counts do not automatically have Poisson uncertainty;
 - model envelopes are not confidence intervals unless defined that way;
-- do not merge multiple uncertainty sources visually unless the analysis defines the combination.
+- do not merge multiple uncertainty sources visually unless the analysis defines the combination;
+- efficiencies and proportions near 0 or 1, or estimated from small counts, should not default to a symmetric Gaussian interval; it can extend past the valid range and misstate coverage. Preserve the bound and any asymmetry, and choose an interval method deliberately (e.g. Wilson/Clopper-Pearson/beta) rather than by convention.
