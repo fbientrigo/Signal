@@ -1,21 +1,27 @@
-"""Assert a prepared workspace contains only what its condition allows.
+"""Validate a prepared benchmark workspace before an agent run.
 
-Not a sandbox. A cheap filesystem check to catch contamination before a
-run starts: a baseline workspace that can see Signal, or a Signal
-workspace that can see benchmark internals (acceptance.md, other runs,
-the repo's own tests/lab/.git). Exits non-zero and lists violations on
-failure.
+This checks filesystem-layout isolation, not OS-level sandboxing. The workspace
+root must live in a separate directory tree from the Signal repository; the
+workspace itself must expose only the files allowed for its condition.
 
 Usage:
-    python benchmarks/scripts/validate_workspace.py --agent claude --condition signal --case plant_growth
+    python benchmarks/scripts/validate_workspace.py \
+        --workspace-root C:/signal-benchmark-workspaces \
+        --agent claude --condition signal --case plant_growth
 """
 import argparse
 import sys
 from pathlib import Path
 
-from prepare_workspace import AGENTS, CONDITIONS, SIGNAL_PAYLOAD, SKILL_ROOT_BY_AGENT, WORKSPACES_DIR
+from prepare_workspace import (
+    AGENTS,
+    CONDITIONS,
+    REPO_ROOT,
+    SIGNAL_PAYLOAD,
+    SKILL_ROOT_BY_AGENT,
+    validate_workspace_root,
+)
 
-# Never allowed in ANY run workspace, regardless of condition.
 ALWAYS_FORBIDDEN_NAMES = {
     "acceptance.md",
     "score.json",
@@ -39,11 +45,20 @@ def find_violations(workspace: Path, agent: str, condition: str) -> list[str]:
         if forbidden in names_present:
             violations.append(f"forbidden path present: {forbidden}")
 
-    own_skill_root = SKILL_ROOT_BY_AGENT[agent].split("/")[0]  # ".claude" or ".agents"
+    own_skill_root = SKILL_ROOT_BY_AGENT[agent].split("/")[0]
     other_skill_roots = {SKILL_ROOT_BY_AGENT[a].split("/")[0] for a in AGENTS} - {own_skill_root}
 
     if condition == "baseline":
-        for forbidden in ("SKILL.md", "CONTRACT.md", "recipes", "ingredients", "components", "references", "themes", "intents"):
+        for forbidden in (
+            "SKILL.md",
+            "CONTRACT.md",
+            "recipes",
+            "ingredients",
+            "components",
+            "references",
+            "themes",
+            "intents",
+        ):
             if forbidden in names_present:
                 violations.append(f"baseline workspace can see Signal: {forbidden}")
         for root in {own_skill_root} | other_skill_roots:
@@ -65,7 +80,11 @@ def find_violations(workspace: Path, agent: str, condition: str) -> list[str]:
             violations.append(f"signal workspace missing SKILL.md at native path: {skill_dir}")
 
         expected = {str((skill_dir / rel).resolve()) for rel in SIGNAL_PAYLOAD}
-        actual_files = {str(p.resolve()) for p in skill_dir.rglob("*") if p.is_file()} if skill_dir.is_dir() else set()
+        actual_files = (
+            {str(p.resolve()) for p in skill_dir.rglob("*") if p.is_file()}
+            if skill_dir.is_dir()
+            else set()
+        )
         extra_files = actual_files - expected
         missing_files = expected - actual_files
         if extra_files:
@@ -84,21 +103,34 @@ def find_violations(workspace: Path, agent: str, condition: str) -> list[str]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--workspace-root",
+        required=True,
+        type=Path,
+        help="External root used by prepare_workspace.py.",
+    )
     parser.add_argument("--agent", required=True, choices=AGENTS)
     parser.add_argument("--condition", required=True, choices=CONDITIONS)
     parser.add_argument("--case", required=True)
     args = parser.parse_args()
 
-    workspace = WORKSPACES_DIR / args.agent / args.condition / args.case
+    try:
+        root = validate_workspace_root(args.workspace_root)
+    except SystemExit as exc:
+        print(f"FAIL: invalid workspace root: {exc}")
+        sys.exit(1)
+
+    workspace = root / args.agent / args.condition / args.case
     violations = find_violations(workspace, args.agent, args.condition)
 
     if violations:
         print(f"FAIL: {workspace}")
-        for v in violations:
-            print(f"  - {v}")
+        for violation in violations:
+            print(f"  - {violation}")
         sys.exit(1)
 
     print(f"PASS: {workspace} ({args.agent}/{args.condition}/{args.case})")
+    print(f"repository isolated from workspace root: {REPO_ROOT.resolve()} != {root}")
 
 
 if __name__ == "__main__":
