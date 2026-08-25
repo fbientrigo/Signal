@@ -21,6 +21,28 @@ The only condition difference is Signal availability:
 
 The common brief is deliberate. Signal should not win merely because one condition was told to preserve semantics while the other was only told to make something pretty.
 
+## Workspace isolation
+
+Do not run evaluated agents from inside the Signal repository tree.
+
+Create every run under an explicit external root using `--workspace-root`. The tooling rejects a root that is inside the Signal repository or is an ancestor of it.
+
+Example:
+
+```powershell
+python benchmarks/scripts/prepare_workspace.py `
+  --workspace-root C:\signal-benchmark-workspaces `
+  --agent codex --condition baseline --case weighted_signal_background
+
+python benchmarks/scripts/validate_workspace.py `
+  --workspace-root C:\signal-benchmark-workspaces `
+  --agent codex --condition baseline --case weighted_signal_background
+```
+
+A baseline workspace contains only `data.csv` and `prompt.txt`. A Signal workspace contains the same inputs plus the minimal project-level Signal skill payload for that agent.
+
+This is **filesystem-layout isolation, not a security sandbox**. For the cleanest manual test, start a fresh agent session rooted at the prepared case directory, disable or avoid unrelated project/global skills and memory where the product allows it, and do not expose prior benchmark outputs or the Signal source checkout to that session.
+
 ## Run sizes
 
 Fast architecture check:
@@ -83,8 +105,9 @@ These cases test the architecture, not chart-family coverage.
 
 - Same agent/product, model configuration, reasoning level, tools, network permissions, and Python environment across conditions.
 - Same common brief, data, case prompt, clarification answer, and output contract.
-- Fresh workspace per run; no prior outputs visible.
+- Fresh external workspace per run; no prior outputs visible.
 - Baseline has no Signal documentation available.
+- Start a fresh agent session for each run; avoid inherited conversation context, unrelated project instructions, user memory, and global skills where the product allows control over them.
 - No human correction before `accept@1`; only frozen pre-render clarification is allowed.
 - Randomize condition order and run paired conditions close in time.
 - Record Signal commit SHA, model/product/config, timestamp, and prompt artifacts.
