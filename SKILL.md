@@ -27,6 +27,19 @@ If missing information can materially change the figure, ask a focused question.
 
 Do not ask for preferences that only change decoration unless the user cares about them.
 
+### Keep explicit requirements
+
+Before choosing a recipe or ingredients, identify the few user-stated requirements that must survive into the figure.
+
+An explicitly important threshold, region, subset, comparison, transformation, or uncertainty is not optional decoration.
+
+Map each such requirement to either:
+
+- the base visual mechanism; or
+- an ingredient that represents it.
+
+Simplification may remove decoration, not stated meaning.
+
 ## 2. Choose the path
 
 ### Fast path — recipe
@@ -92,7 +105,7 @@ Open only what the problem needs:
 - scatter, density, heatmap, 2D field → `ingredients/relationship.md`
 - ordered x/time and connecting observations → `ingredients/trend.md`
 - intervals, error bars, bands → `ingredients/uncertainty.md`
-- context, highlight, reference, annotation → `ingredients/emphasis.md`
+- explicitly important subset/region/threshold, context, highlight, reference, annotation → `ingredients/emphasis.md`
 - facets and comparable panels → `ingredients/layout.md`
 
 Other references:
