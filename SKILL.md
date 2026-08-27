@@ -15,17 +15,43 @@ Do not invent a Signal plotting API. Leave native Python behind.
 
 Start with what the reader should understand.
 
-If missing information can materially change the figure, ask a focused question. Typical high-value unknowns are:
+### Intent sufficiency gate
 
-- focus versus context;
-- useful signal versus noise;
-- whether color already has meaning;
-- uncertainty definition;
-- ordering;
-- weights or normalization;
-- valid transformations.
+Before choosing a recipe or ingredients, ask:
 
-Do not ask for preferences that only change decoration unless the user cares about them.
+> Can Signal move from the user's question to a recipe / ingredient composition without inventing a material priority, interpretation, comparison, or reader goal?
+
+- **Yes → fast path.** Continue without constructing a full Visual Brief.
+- **No → Visual Brief.**
+
+Dataset size, row or column count, plotting-library complexity, and visual sophistication do not trigger the brief by themselves. The trigger is unresolved intent: materially different interpretations would lead to materially different visual decisions.
+
+### Visual Brief — only when the gate fails
+
+Keep the brief internal and small. Capture only information that can change the visual decision:
+
+- **Reader question** — what should the reader understand?
+- **Decision / intended takeaway** — what comparison, judgment, or conclusion should the figure support? This may be absent for a purely descriptive plot.
+- **Focus vs context** — what deserves attention, what context is necessary, and what is noise for this question?
+- **Material data facts** — when data are available, inspect only structural properties capable of changing the visual mechanism: variable types, observed ranges or orders of magnitude, skew or long tails, density or overlap, sample count, missingness, category cardinality, bounds, weights, asymmetric intervals, and obvious temporal or ordered structure.
+- **Destination** — paper, slides, screen, exploratory, or another explicit medium.
+- **Visual question** — compress the reasoning into the exact question the figure must answer.
+
+This is not autonomous EDA. Inspect only discriminating data properties needed for the visual decision.
+
+Treat potentially relevant information in three states:
+
+- **Known** — explicitly stated by the user or reliably present in the data. Use it.
+- **Safely inferable** — a structural data property that does not assign scientific meaning. Use it only to inform the visual decision.
+- **Blocking unknown** — a missing answer for which plausible alternatives would materially change the figure or its interpretation. Ask the user only for these, preferably with one focused question.
+
+Do not infer scientific semantics from numerical structure or column names. Values in `[0, 1]` do not prove probability semantics; a column named `error` does not establish SD, SE, or an interval definition; a positive variable does not by itself justify a log transform.
+
+An intended takeaway is not evidence. Treat requests such as "show that the new method is better" as a claim to test visually, not permission to manufacture the conclusion. The figure must remain able to contradict the desired claim.
+
+Finish the brief with one concrete visual question before recipe or ingredient selection. Reuse any destination or semantics already resolved in the brief rather than asking or deciding them again.
+
+If no Visual Brief is needed, still ask a focused question when a blocking semantic unknown can materially change interpretation. Do not ask for preferences that only change decoration unless the user cares about them.
 
 ### Keep explicit requirements
 
